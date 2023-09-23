@@ -1,0 +1,223 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Sans-Serif;
+}
+:root {
+  --bg: #2f323f;
+}
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+}
+.sidebar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  inset: 40px 0 40px 20px;
+  width: 75px;
+  background-color: #fff;
+}
+.sidebar.active {
+  width: 250px;
+}
+.menuToggle {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 22px;
+  border-bottom: 2px solid rgba(0,0,0,.25);
+}
+.menuToggle::before {
+  content: ' ';
+  position: absolute;
+  width: 30px;
+  height: 2px;
+  background-color: #333;
+  transform: translateY(-8px);
+  transition: 0.5s;
+  display: flex;
+}
+.sidebar.active .menuToggle::before{
+  transform: translateY(0) rotate(45deg);
+}
+.menuToggle::after {
+  content: ' ';
+  position: absolute;
+  width: 30px;
+  height: 2px;
+  background-color: #333;
+  transform: translateY(8px);
+  box-shadow: 0 -8px 0 #333;
+  transition: 0.5s;
+}
+.sidebar.active .menuToggle::after{
+  transform: translateY(0) rotate(-45deg);
+  box-shadow: 0 0 0 #333;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+ul li {
+  position: relative;
+  width: 100%;
+  height: 76px;
+  list-style: none;
+  border: 8px solid transparent;
+  border-radius: 12px;
+  transition: 0.5s;
+}
+ul li.active {
+  transform: translateX(30px);
+  background-color: var(--bg);
+}
+
+ul li::before {
+  content: ' ';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-bottom-right-radius: 20px;
+  top: -28px;
+  right: -10px;
+  box-shadow: 6px 5px 0 5px var(--bg);
+  transform: scale(0);
+  transform-origin: bottom right;
+  transition: 0.5s;
+}
+ul li.active::before {
+  right: 22px;
+  transform: scale(1);
+}
+ul li::after {
+  content: ' ';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-top-right-radius: 20px;
+  bottom: -28px;
+  right: -10px;
+  box-shadow: 6px -3px 0 3px var(--bg);
+  transform: scale(0);
+  transform-origin: bottom right;
+  transition: 0.5s;
+}
+ul li.active::after {
+  right: 22px;
+  transform: scale(1);
+}
+
+ul li a {
+  position: relative;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  z-index: 1000;
+}
+
+ul li a .icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  min-width: 60px;
+  line-height: 60px;
+  font-size: 1.75em;
+  border-radius: 12px;
+  border: 6px solid transparent;
+  padding: 0 2px;
+  transition: 0.5s;
+}
+ul li .icon img {
+  width: 60%;
+  height: 60%;
+}
+ul li.active a .icon{
+  background-color: var(--color);
+}
+ul li a .icon::after {
+  content: ' ';
+  position: absolute;
+  left: -60px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 6px solid var(--bg);
+  background-color: var(--color);
+}
+ul li a .text {
+  position: relative;
+  height: 60px;
+  padding: 0 14px;
+  color: #333;
+  visibility: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar.active ul li a .text{
+  visibility: visible;
+}
+.sidebar.active ul li.active a .text{
+  color: #fff;
+}
+
+@media (max-width: 600px){
+  .sidebar {
+    inset: 20px 0 20px 12px;
+    width: 64px;
+  }
+  .sidebar.active {
+    width: 220px;
+  }
+  .menuToggle {
+    height: 48px;
+    padding: 0 18;
+  }
+  .menuToggle::before, .menuToggle::after {
+    width: 24px;
+  }
+  ul li {
+    height: 66px;
+    border: 6px solid transparent;
+  }
+  ul li.active {
+    transform: translateX(30px);
+  }
+  ul li::before {
+    top: -26px;
+    border-bottom-right-radius: 16px;
+  }
+  ul li::after {
+    bottom: -26px;
+    border-top-right-radius: 16px;
+  }
+  ul li.active::before {
+    right: 20px;
+    transform: scale(1);
+  }
+  ul li a .icon {
+    min-width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  ul li a .text {
+    height: 50px;
+  }
+}
